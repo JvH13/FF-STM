@@ -10,7 +10,8 @@ For our topic model we use Latent Dirichlet Allocation (LDA; Blei, 2012; Blei, N
 
 ![LDA_visual](https://user-images.githubusercontent.com/79323371/121391579-cf733c80-c94e-11eb-966c-2b2e5b243a35.png)
 
-Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
+	Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of
+	this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
 
 **Structural Topic Modeling**
 
@@ -21,8 +22,8 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
   ![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
 
 	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 in 
-
-in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word distributions (β).
+	in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word 	
+	distributions (β).
 
 Content analysis is utilised in CSR research to analyze e.g. company CSR reports (Tate, Ellram, and Kirchoff, 2010), newspaper articles (Lee & Carroll, 2011) and academic articles (Lee, 2017), but these studies used manual coding which has the disadvantage that only relatively small datasets can be analyzed. On the other hand, a growing body of literature (e.g. Chae & Park, 2018; Benites-Lazaro, Giatti and Giarolla, 2018; Goloshchapova, Poon, Pritchard , and Reed, 2019) uses ML techniques for this purpose and the advantage of ML is that huge datasets can be easily analyzed. 
 
@@ -30,7 +31,8 @@ Content analysis is utilised in CSR research to analyze e.g. company CSR reports
 
 Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’ (NOTE:  https://www.structuraltopicmodel.com/ ) (Roberts et al. 2014; Roberts et al. 2019). 
 
-![image alt text](image_2.png)
+![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
+
 
 	Figure 3. Workflow of the STM process.
 
