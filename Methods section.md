@@ -18,7 +18,7 @@ Because of LDA’s simplicity it provides a viable foundation for building more 
 
 STM builds on LDA by adding two extra components: topic prevalence covariates and topic content covariates. Topic prevalence means how much of a document is associated with a certain topic and topic content is about the words used in a certain topic (Chae & Park, 2018; Roberts et al. 2019). For example, in this research ‘Company source’ is a topic prevalence covariate and allows the comparison between tweets about H&M and H&M’s CSR reports. The covariate makes it possible to see whether a certain topic is discussed more often in tweets than in CSR reports (or vice versa). Figure 2. extents Figure 1. with the two types of covariates.
 
-  ![image alt text](image_1.png)
+  ![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
 
 	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 in 
 
