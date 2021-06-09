@@ -6,3 +6,28 @@ data$content <-gsub(" JvH132:.*","",data$content)  # we added this word 'JvH131'
 ## Delete whitespace in column
 data$content <- trimws(data$content, which = ("both"))
 write.csv(data, 'News_cleaned1.csv')
+
+# Remove HTML tags that are in the texts.
+data$Content = str_replace_all(data$Content, "&#x27;|&quot;|&#x2F;", "'") ## weird encoding
+data$Content = str_replace_all(data$Content, "<a(.*?)>", " ")             ## links 
+data$Content = str_replace_all(data$Content, "&gt;|&lt;|&amp;", " ")      ## html yuck
+data$Content = str_replace_all(data$Content, "&#[:digit:]+;", " ")        ## html yuck
+data$Content = str_remove_all(data$Content, "<[^>]*>")                   ## more html yuck
+
+# Clean tweets
+# Remove html text (probably doing some double work here, but better safe than sound). 
+data$Content <- gsub("&amp", "", data$Content)
+data$Content <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", data$Content)
+data$Content <- gsub("@\\w+", "", data$Content)
+data$Content <- gsub("[[:punct:]]", "", data$Content)
+data$Content <- gsub("[[:digit:]]", "", data$Content)
+data$Content <- gsub("http\\w+", "", data$Content)
+# data$Content <- gsub("[ \t]{2,}", "", data$Content)
+data$Content <- gsub("^\\s+|\\s+$", "", data$Content)
+
+# Use textProcessor and prepDocuments to clean and prepare data. This is a function in the STM package. It performs multiple tasks: removes stopwords, punctuation, numbers, stems the words, converts words to lower case and removes infrequent words.
+processed <- textProcessor(data$Content, metadata = data)
+out <- prepDocuments(processed$documents, processed$vocab, processed$meta)
+docs <- out$documents
+vocab <- out$vocab
+meta <- out$meta
