@@ -30,7 +30,7 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 
 **STM process**
 
-Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’ (Roberts et al. 2014; Roberts et al. 2019). [https://www.structuraltopicmodel.com/](https://www.structuraltopicmodel.com/) 
+Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package [‘STM’](https://www.structuraltopicmodel.com/)  (Roberts et al. 2014; Roberts et al. 2019). 
 
 ![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
 
@@ -38,7 +38,7 @@ Figure 3. provides an overview of the STM process. First, text data (and accompa
 
 **Data collection**
 
-In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the snscrape package [https://github.com/JustAnotherArchivist/snscrape](https://github.com/JustAnotherArchivist/snscrape). Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
+In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the [snscrape package](https://github.com/JustAnotherArchivist/snscrape)(https://github.com/JustAnotherArchivist/snscrape). Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
 
 **Text pre-processing**
 
@@ -86,15 +86,11 @@ With the 23 topics that are left we used the ‘estimateEffect’ function to re
 
 **Bibliography**
 
-Benites-Lazaro, L. L., Giatti, L., & Giarolla, A. (2018). Sustainability and governance of sugarcane ethanol companies in Brazil: Topic modeling analysis of CSR reporting. Journal of Cleaner Production, 197, 583-591.
-
 Blei, D. M. (2012). Probabilistic topic models. Communications of the ACM, 55(4), 77-84.
 
 Blei, D. M., & Laﬀerty, J. D. (2009). Topic models. In Text mining (pp. 101-124). Chapman and Hall/CRC.
 
 Blei, D. M., Ng, A. Y., & Jordan, M. I. (2003). Latent dirichlet allocation. the Journal of machine Learning research, 3, 993-1022.
-
-Goloshchapova, I., Poon, S. H., Pritchard, M., & Reed, P. (2019). Corporate social responsibility reports: topic analysis and big data approach. The European Journal of Finance, 25(17), 1637-1654.
 
 Lee, T. H. (2017). The status of corporate social responsibility research in public relations: A content analysis of published articles in eleven scholarly journals from 1980 to 2015. Public Relations Review, 43(1), 211-218.
 
@@ -109,6 +105,4 @@ Roberts, M., Stewart, B., Tingley, D., Benoit, K., Stewart, M. B., Rcpp, L., ...
 Roberts, M. E., Stewart, B. M., Tingley, D., Lucas, C., Leder‐Luis, J., Gadarian, S. K., ... & Rand, D. G. (2014). Structural topic models for open‐ended survey responses. American Journal of Political Science, 58(4), 1064-1082.
 
 Sarkar, S., & Searcy, C. (2016). Zeitgeist or chameleon? A quantitative analysis of CSR definitions. Journal of Cleaner Production, 135, 1423-1435.
-
-Tate, W. L., Ellram, L. M., & Kirchoff, J. F. (2010). Corporate social responsibility reports: a thematic analysis related to supply chain management. Journal of supply chain management, 46(1), 19-44.
 
