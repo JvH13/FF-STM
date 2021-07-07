@@ -18,13 +18,7 @@ Because of LDA’s simplicity it provides a viable foundation for building more 
 
 STM builds on LDA by adding two extra components: topic prevalence covariates and topic content covariates. Topic prevalence means how much of a document is associated with a certain topic and topic content is about the words used in a certain topic (Chae & Park, 2018; Roberts et al. 2019). For example, in this research ‘Company source’ is a topic prevalence covariate and allows the comparison between tweets about H&M and H&M’s CSR reports. The covariate makes it possible to see whether a certain topic is discussed more often in tweets than in CSR reports (or vice versa). Figure 2. extents Figure 1. with the two types of covariates.
 
-  
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
-
+![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
 
 	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 
 
@@ -35,13 +29,7 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 
 Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’[^1] (Roberts et al. 2014; Roberts et al. 2019). 
 
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
+![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
 
 	Figure 3. Workflow of the STM process.
 
