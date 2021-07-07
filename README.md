@@ -10,7 +10,8 @@ For our topic model we use Latent Dirichlet Allocation (LDA; Blei, 2012; Blei, N
 
 ![LDA_visual](https://user-images.githubusercontent.com/79323371/121391579-cf733c80-c94e-11eb-966c-2b2e5b243a35.png)
 
-    Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of 	this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
+    Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of
+    this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
 
 **Structural Topic Modeling**
 
