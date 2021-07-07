@@ -1,11 +1,3 @@
-# FF-STM
-Web Appendix - Methodology for Structural Topic Modeling
-
-This repository serves as a web appendix for the paper **'Wrinkles in the CSR story: CSR and the service brand experience in fast fashion retailing** by van Haren, Mickelsson, and Lemmink (2021)
-
-The repository contains a complementary and more extensive discussion of the methodology from the article and all the code that is used in the paper to perform 
-Structural Topic Modeling (STM).
-
 **Methodology**
 
 **Natural Language processing**
@@ -16,10 +8,16 @@ For this study we used Natural Language Processing (NLP), which is an umbrella t
 
 For our topic model we use Latent Dirichlet Allocation (LDA; Blei, 2012; Blei, Ng, and Jordan, 2003) because it is the simplest and therefore most popular model used in the literature. LDA uses a ‘reversed generative process’ answering the question: ‘What is the hidden structure that likely generated the observed collection?’ (Blei, 2012, p.10). The documents and its content (words) are observed, but the topics, per-document topic distributions and per-document per-word topic assignments are hidden structures. The model tries to deduce the hidden topic structure, based on the observed documents and words inside the documents. Figure 1. visualizes this process. 
 
-![LDA_visual](https://user-images.githubusercontent.com/79323371/121391579-cf733c80-c94e-11eb-966c-2b2e5b243a35.png)
 
-	Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of
-	this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
+
+<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+![alt_text](images/image1.png "image_tooltip")
+
+
+
+    Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
 
 **Structural Topic Modeling**
 
@@ -27,40 +25,75 @@ Because of LDA’s simplicity it provides a viable foundation for building more 
 
 STM builds on LDA by adding two extra components: topic prevalence covariates and topic content covariates. Topic prevalence means how much of a document is associated with a certain topic and topic content is about the words used in a certain topic (Chae & Park, 2018; Roberts et al. 2019). For example, in this research ‘Company source’ is a topic prevalence covariate and allows the comparison between tweets about H&M and H&M’s CSR reports. The covariate makes it possible to see whether a certain topic is discussed more often in tweets than in CSR reports (or vice versa). Figure 2. extents Figure 1. with the two types of covariates.
 
-  ![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
+  
 
-	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 in 
-	in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word 	
-	distributions (β).
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-Content analysis is utilised in CSR research to analyze e.g. company CSR reports (Tate, Ellram, and Kirchoff, 2010), newspaper articles (Lee & Carroll, 2011) and academic articles (Lee, 2017), but these studies used manual coding which has the disadvantage that only relatively small datasets can be analyzed. On the other hand, a growing body of literature (e.g. Chae & Park, 2018; Benites-Lazaro, Giatti and Giarolla, 2018; Goloshchapova, Poon, Pritchard , and Reed, 2019) uses ML techniques for this purpose and the advantage of ML is that huge datasets can be easily analyzed. 
+
+![alt_text](images/image2.png "image_tooltip")
+
+
+	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 
+
+
+    in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word distributions (β).
 
 **STM process**
 
-Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’ (https://www.structuraltopicmodel.com/ ;Roberts et al. 2014; Roberts et al. 2019). 
+Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’[^1] (Roberts et al. 2014; Roberts et al. 2019). 
 
-![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
+
+
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+![alt_text](images/image3.png "image_tooltip")
 
 
 	Figure 3. Workflow of the STM process.
 
 **Data collection**
 
-In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the snscrape package (https://github.com/JustAnotherArchivist/snscrape). [You can find the code here.](https://github.com/JvH13/FF-STM/blob/main/Twitter_scraper) Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
+In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the snscrape package[^2]. Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
 
 **Text pre-processing**
 
-All non-English texts were removed from the corpus and only tweets and news articles containing CSR keywords, as defined by Sarkar & Searcy (2016), were included. The reason for this is twofold: practically, there is much ‘garbage’ in these two data streams, e.g. teen girls tweeting a picture of themselves in a H&M dress is not very relevant considering the scope of this research. Theoretically, it might seem like cherry picking, but in this study we don’t want to answer the question ‘if CSR topics are discussed in relation to these companies’, but ‘which topics are discussed in relation to these fast fashion companies’, so only including texts containing CSR keywords is in line with our research question. Search terms were stemmed (e.g. ‘sustainab*’). News articles were also stripped from unnecessary metadata, only leaving plain text. Furthermore, HTML tags, URLs, punctuation, special characters, numbers and stop words were removed from the texts. Words were stemmed, converted to lower cases, and infrequent words were removed. [You can find the code here](https://github.com/JvH13/FF-STM/blob/main/Clean_data)
+All non-English texts were removed from the corpus and only tweets and news articles containing CSR keywords, as defined by Sarkar & Searcy (2016), were included. The reason for this is twofold: practically, there is much ‘garbage’ in these two data streams, e.g. teen girls tweeting a picture of themselves in a H&M dress is not very relevant considering the scope of this research. Theoretically, it might seem like cherry picking, but in this study we don’t want to answer the question ‘if CSR topics are discussed in relation to these companies’, but ‘which topics are discussed in relation to these fast fashion companies’, so only including texts containing CSR keywords is in line with our research question. Search terms were stemmed (e.g. ‘sustainab*’). News articles were also stripped from unnecessary metadata, only leaving plain text. Furthermore, HTML tags, URLs, punctuation, special characters, numbers and stop words were removed from the texts. Words were stemmed, converted to lower cases, and infrequent words were removed. 
 
 The resulting text corpus consists of 89 CSR reports and press releases (H&M: 52; Zara: 19; Primark: 18), 57,414 tweets (H&M: 19,050; Zara: 15,445; Primark: 22,919), and 5,351 news articles (H&M: 2,227; Zara: 734; Primark: 2,390) for a total of 62,854 documents.
 
 **Selecting a model**
 
-The STM model is an unsupervised ML technique, but needs one input from the researcher: the number of topics. There is no right or wrong answer to how many topics should be used (Roberts et al. 2019), but using the searchK function in the STM package a data-driven decision can be made on the number of topics. According to the official documentation, 60 - 100 topics works well for corpora with 10,000 to 100,000 documents (Roberts et al. 2017); therefore diagnostics were estimated for 60, 70, 80, 90, and 100 topics. Diagnostics include residuals, semantic coherence and held-out likelihood estimations. A mixed approach was used to choose the optimal number of topics. First, residuals of the different models were compared. Then, for models with the lowest residuals, topic quality was measured. Topic quality consists of two dimensions. Topic coherence, which is maximized when the most probable words within a topic co-occur together and topic exclusivity, which means that top words for one topic do not appear as top words for other topics (Roberts et al. 2019, Chae & Park, 2018). [You can find the code here](https://github.com/JvH13/FF-STM/blob/main/Select_model)
+The STM model is an unsupervised ML technique, but needs one input from the researcher: the number of topics. There is no right or wrong answer to how many topics should be used (Roberts et al. 2019), but using the searchK function in the STM package a data-driven decision can be made on the number of topics. According to the official documentation, 60 - 100 topics works well for corpora with 10,000 to 100,000 documents (Roberts et al. 2017); therefore diagnostics were estimated for 60, 70, 80, 90, and 100 topics. Diagnostics include residuals, semantic coherence and held-out likelihood estimations. A mixed approach was used to choose the optimal number of topics. First, the diagnostics were analyzed. Important to remember is that there is no ‘best’ answer (Roberts et al., 2019). It is always a trade-off between different metrics. Second, topic quality was measured. Topic quality consists of two dimensions. Topic coherence, which is maximized when the most probable words within a topic co-occur together and topic exclusivity, which means that top words for one topic do not appear as top words for other topics (Roberts et al. 2019, Chae & Park, 2018). Figure 4. shows the output of the searchK function and Figure 5. shows topic quality (the trade-off between semantic coherence and exclusivity). 
 
 **Estimating the best model**
 
+We choose a model with 80 topics, because it appears to be a good trade-off between the various metrics: average values for residuals, semantic coherence and lower bound and the second-highest held-out likelihood value. Inspecting figure 5, the majority of the topics appear near the top right corner, which was true for all the different amounts of topics, which means all models are equally qualified with regards to topic quality. 
+
+
+
+<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+![alt_text](images/image4.png "image_tooltip")
+
+
+	Figure 4. Diagnostic statistics: Held-out likelihood, residuals, semantic coherence,
+
+	and lower bound
+
 **Understanding the model**
+
+The next step is to interpret the outcomes of the topic model. First of all, the topics have to be interpreted. Using ‘labelTopics’, four different methods of devising the words that form a topic are presented[^3] (Roberts et al., 2019). After interpreting the topics, we conclude that 23 out of 80 topics are CSR related. Many topics are about customer service and opening times of stores. Sarkar & Searcy (2016)’s CSR dimensions indeed contain the keyword ‘customers’, but we think that in the context of this paper these topics are not very relevant. 
+
+With the 23 topics that are left we used the ‘estimateEffect’ function to regress the topic proportions on the documents, with the document meta-data as the covariates (Roberts et al., 2019). The results show, with a 95% confidence interval, whether a topic is discussed more or less in certain documents or not. Figure 6., 7., and 8. show how topic proportions vary between different news sources (Twitter, news media and company communication). For example in Figure 6., ‘hospital donation’, ‘data protection’, and ‘consciousness fashion’ are discussed significantly more often in the company reports compared to the news media. ‘government’, ‘factory worker union’, and ‘fair wages’ are not discussed significantly more in the news media compared to the company reports and vice versa. ‘ABF Food profits’, racist H&M ad’, and ‘furloughing employees’ are discussed significantly more often in the news media compared to the company reports. In the same manner Figure 7. and 8. can be read. 
+
+	Figure 5. Topic quality  for a topic model with 80 topics.
+
+Figure 6. Topic proportion differences between news articles and company reports.
+
+
+    The black dots represent the proportion values and the black lines are the 95% confidence intervals. 
 
 **Bibliography**
 
@@ -89,3 +122,16 @@ Roberts, M. E., Stewart, B. M., Tingley, D., Lucas, C., Leder‐Luis, J., Gadari
 Sarkar, S., & Searcy, C. (2016). Zeitgeist or chameleon? A quantitative analysis of CSR definitions. Journal of Cleaner Production, 135, 1423-1435.
 
 Tate, W. L., Ellram, L. M., & Kirchoff, J. F. (2010). Corporate social responsibility reports: a thematic analysis related to supply chain management. Journal of supply chain management, 46(1), 19-44.
+
+
+<!-- Footnotes themselves at the bottom. -->
+## Notes
+
+[^1]:
+     [https://www.structuraltopicmodel.com/](https://www.structuraltopicmodel.com/) 
+
+[^2]:
+     [https://github.com/JustAnotherArchivist/snscrape](https://github.com/JustAnotherArchivist/snscrape) 
+
+[^3]:
+     See R Documentation for an in-depth explanation: [https://www.rdocumentation.org/packages/stm/versions/1.3.6/topics/labelTopics](https://www.rdocumentation.org/packages/stm/versions/1.3.6/topics/labelTopics) 
