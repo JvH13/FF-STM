@@ -1,3 +1,7 @@
+This Github page will serve as a webappendix for the paper 'Wrinkles in a CSR Story: CSR and Service Brand Experience in Fast Fashion Retailing by Van Haren, J.G.M., Mickelsson, J, and Lemmink, J.G.A.M. (2021).
+
+In this webappendix you will find a more comprehensive discussion of the methodology and all the code that was used for the analyses in this paper.
+
 **Methodology**
 
 **Natural Language processing**
