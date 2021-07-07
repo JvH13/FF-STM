@@ -1,0 +1,1 @@
+plot(topicQuality(model = model80, documents = docs))
