@@ -21,8 +21,8 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 
 ![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
 
-	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 
-	in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word 		distributions (β).
+	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic
+	proportions (θ). Topic content covariates (Υ) influence the per-topic word distributions (β).
 
 **STM process**
 
