@@ -10,7 +10,7 @@ For our topic model we use Latent Dirichlet Allocation (LDA; Blei, 2012; Blei, N
 
 ![LDA_visual](https://user-images.githubusercontent.com/79323371/121391579-cf733c80-c94e-11eb-966c-2b2e5b243a35.png)
 
-    Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
+    Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of 	this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
 
 **Structural Topic Modeling**
 
@@ -21,9 +21,7 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 ![STM_visual](https://user-images.githubusercontent.com/79323371/121391819-13fed800-c94f-11eb-9085-94cc7436c9a2.png)
 
 	Figure 2. A graphical representation of STM (Adapted from Roberts et al. 2014 
-
-
-    in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word distributions (β).
+	in Chae & Park, 2018, p.5). The topic prevalence covariate (X) influences the topic  proportions (θ). Topic content covariates (Υ) influence the per-topic word 		distributions (β).
 
 **STM process**
 
@@ -51,12 +49,7 @@ The STM model is an unsupervised ML technique, but needs one input from the rese
 
 We choose a model with 80 topics, because it appears to be a good trade-off between the various metrics: average values for residuals, semantic coherence and lower bound and the second-highest held-out likelihood value. Inspecting figure 5, the majority of the topics appear near the top right corner, which was true for all the different amounts of topics, which means all models are equally qualified with regards to topic quality. 
 
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
+![searchK_diagnostics](https://user-images.githubusercontent.com/79323371/124749384-71714f00-df24-11eb-813e-5f9ee0147514.png)
 
 
 	Figure 4. Diagnostic statistics: Held-out likelihood, residuals, semantic coherence,
@@ -69,12 +62,21 @@ The next step is to interpret the outcomes of the topic model. First of all, the
 
 With the 23 topics that are left we used the ‘estimateEffect’ function to regress the topic proportions on the documents, with the document meta-data as the covariates (Roberts et al., 2019). The results show, with a 95% confidence interval, whether a topic is discussed more or less in certain documents or not. Figure 6., 7., and 8. show how topic proportions vary between different news sources (Twitter, news media and company communication). For example in Figure 6., ‘hospital donation’, ‘data protection’, and ‘consciousness fashion’ are discussed significantly more often in the company reports compared to the news media. ‘government’, ‘factory worker union’, and ‘fair wages’ are not discussed significantly more in the news media compared to the company reports and vice versa. ‘ABF Food profits’, racist H&M ad’, and ‘furloughing employees’ are discussed significantly more often in the news media compared to the company reports. In the same manner Figure 7. and 8. can be read. 
 
+![TopicQuality_model80](https://user-images.githubusercontent.com/79323371/124749497-982f8580-df24-11eb-9b6a-0adf7a32b4b7.png)
+
 	Figure 5. Topic quality  for a topic model with 80 topics.
+	
+	
+	
+![model80_News_Company_reports](https://user-images.githubusercontent.com/79323371/124749862-0d02bf80-df25-11eb-83dc-d44a1a4ea0d7.png)
 
-Figure 6. Topic proportion differences between news articles and company reports.
+![model80_News_Twitter](https://user-images.githubusercontent.com/79323371/124749926-2441ad00-df25-11eb-9faa-05fd4ab2df0b.png)
+
+![model80_Twitter_Company_reports](https://user-images.githubusercontent.com/79323371/124750008-39b6d700-df25-11eb-92eb-ec0f2193c261.png)
 
 
-    The black dots represent the proportion values and the black lines are the 95% confidence intervals. 
+	Figure 6. Topic proportion differences between (1) news articles and company reports, (2) news articles and Tweets, (3) Tweets and company reports
+	The black dots represent the proportion values and the black lines are the 95% confidence intervals. 
 
 **Bibliography**
 
