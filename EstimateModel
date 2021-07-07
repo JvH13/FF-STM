@@ -1,0 +1,2 @@
+model80 <- stm(documents = out$documents, vocab = out$vocab, 
+K = 80, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral")
