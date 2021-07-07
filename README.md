@@ -30,7 +30,7 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 
 **STM process**
 
-Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’[^1] (Roberts et al. 2014; Roberts et al. 2019). 
+Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package ‘STM’ (Roberts et al. 2014; Roberts et al. 2019). [https://www.structuraltopicmodel.com/](https://www.structuraltopicmodel.com/) 
 
 ![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
 
@@ -38,13 +38,16 @@ Figure 3. provides an overview of the STM process. First, text data (and accompa
 
 **Data collection**
 
-In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the snscrape package[^2]. Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
+In this study our dataset (text corpus) consists of three streams of information, collected between 01-01-2018 and 31-12-2020. First, CSR reports and press releases from three fast fashion companies (H&M, Zara, and Primark) were collected from their corporate websites. In these texts the companies try to create a CSR identity for themselves. Second, tweets from consumers about these fast fashion companies were scraped from Twitter using Python and the snscrape package [https://github.com/JustAnotherArchivist/snscrape](https://github.com/JustAnotherArchivist/snscrape). Third, news articles from the news media were collected from the LexisNexis database. Here, consumers and the news media create a CSR reputation about the fast fashion companies. 
 
 **Text pre-processing**
 
+For indepth information about the STM package please also see [this website](https://www.rdocumentation.org/packages/stm/versions/1.3.6)
+
 All non-English texts were removed from the corpus and only tweets and news articles containing CSR keywords, as defined by Sarkar & Searcy (2016), were included. The reason for this is twofold: practically, there is much ‘garbage’ in these two data streams, e.g. teen girls tweeting a picture of themselves in a H&M dress is not very relevant considering the scope of this research. Theoretically, it might seem like cherry picking, but in this study we don’t want to answer the question ‘if CSR topics are discussed in relation to these companies’, but ‘which topics are discussed in relation to these fast fashion companies’, so only including texts containing CSR keywords is in line with our research question. Search terms were stemmed (e.g. ‘sustainab*’). News articles were also stripped from unnecessary metadata, only leaving plain text. Furthermore, HTML tags, URLs, punctuation, special characters, numbers and stop words were removed from the texts. Words were stemmed, converted to lower cases, and infrequent words were removed. 
 
-The resulting text corpus consists of 89 CSR reports and press releases (H&M: 52; Zara: 19; Primark: 18), 57,414 tweets (H&M: 19,050; Zara: 15,445; Primark: 22,919), and 5,351 news articles (H&M: 2,227; Zara: 734; Primark: 2,390) for a total of 62,854 documents.
+The resulting text corpus consists of 89 CSR reports and press releases (H&M: 52; Zara: 19; Primark: 18), 57,414 tweets (H&M: 19,050; Zara: 15,445; Primark: 22,919), and 5,
+51 news articles (H&M: 2,227; Zara: 734; Primark: 2,390) for a total of 62,854 documents.
 
 **Selecting a model**
 
@@ -61,7 +64,7 @@ We choose a model with 80 topics, because it appears to be a good trade-off betw
 
 **Understanding the model**
 
-The next step is to interpret the outcomes of the topic model. First of all, the topics have to be interpreted. Using ‘labelTopics’, four different methods of devising the words that form a topic are presented[^3] (Roberts et al., 2019). After interpreting the topics, we conclude that 23 out of 80 topics are CSR related. Many topics are about customer service and opening times of stores. Sarkar & Searcy (2016)’s CSR dimensions indeed contain the keyword ‘customers’, but we think that in the context of this paper these topics are not very relevant. 
+The next step is to interpret the outcomes of the topic model. First of all, the topics have to be interpreted. Using ‘labelTopics’, four different methods of devising the words that form a topic are presented (Roberts et al., 2019). After interpreting the topics, we conclude that 23 out of 80 topics are CSR related. Many topics are about customer service and opening times of stores. Sarkar & Searcy (2016)’s CSR dimensions indeed contain the keyword ‘customers’, but we think that in the context of this paper these topics are not very relevant. 
 
 With the 23 topics that are left we used the ‘estimateEffect’ function to regress the topic proportions on the documents, with the document meta-data as the covariates (Roberts et al., 2019). The results show, with a 95% confidence interval, whether a topic is discussed more or less in certain documents or not. Figure 6., 7., and 8. show how topic proportions vary between different news sources (Twitter, news media and company communication). For example in Figure 6., ‘hospital donation’, ‘data protection’, and ‘consciousness fashion’ are discussed significantly more often in the company reports compared to the news media. ‘government’, ‘factory worker union’, and ‘fair wages’ are not discussed significantly more in the news media compared to the company reports and vice versa. ‘ABF Food profits’, racist H&M ad’, and ‘furloughing employees’ are discussed significantly more often in the news media compared to the company reports. In the same manner Figure 7. and 8. can be read. 
 
@@ -109,15 +112,3 @@ Sarkar, S., & Searcy, C. (2016). Zeitgeist or chameleon? A quantitative analysis
 
 Tate, W. L., Ellram, L. M., & Kirchoff, J. F. (2010). Corporate social responsibility reports: a thematic analysis related to supply chain management. Journal of supply chain management, 46(1), 19-44.
 
-
-<!-- Footnotes themselves at the bottom. -->
-## Notes
-
-[^1]:
-     [https://www.structuraltopicmodel.com/](https://www.structuraltopicmodel.com/) 
-
-[^2]:
-     [https://github.com/JustAnotherArchivist/snscrape](https://github.com/JustAnotherArchivist/snscrape) 
-
-[^3]:
-     See R Documentation for an in-depth explanation: [https://www.rdocumentation.org/packages/stm/versions/1.3.6/topics/labelTopics](https://www.rdocumentation.org/packages/stm/versions/1.3.6/topics/labelTopics) 
