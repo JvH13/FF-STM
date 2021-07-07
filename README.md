@@ -53,9 +53,7 @@ We choose a model with 80 topics, because it appears to be a good trade-off betw
 ![searchK_diagnostics](https://user-images.githubusercontent.com/79323371/124749384-71714f00-df24-11eb-813e-5f9ee0147514.png)
 
 
-	Figure 4. Diagnostic statistics: Held-out likelihood, residuals, semantic coherence,
-
-	and lower bound
+	Figure 4. Diagnostic statistics: Held-out likelihood, residuals, semantic coherence, and lower bound
 
 **Understanding the model**
 
