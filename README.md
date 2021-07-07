@@ -8,14 +8,7 @@ For this study we used Natural Language Processing (NLP), which is an umbrella t
 
 For our topic model we use Latent Dirichlet Allocation (LDA; Blei, 2012; Blei, Ng, and Jordan, 2003) because it is the simplest and therefore most popular model used in the literature. LDA uses a ‘reversed generative process’ answering the question: ‘What is the hidden structure that likely generated the observed collection?’ (Blei, 2012, p.10). The documents and its content (words) are observed, but the topics, per-document topic distributions and per-document per-word topic assignments are hidden structures. The model tries to deduce the hidden topic structure, based on the observed documents and words inside the documents. Figure 1. visualizes this process. 
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
-
+![LDA_visual](https://user-images.githubusercontent.com/79323371/121391579-cf733c80-c94e-11eb-966c-2b2e5b243a35.png)
 
     Figure 1. A graphical representation for LDA (Adapted from Blei, 2012 in Chae &  Park, 2018, p.4). The documents and its content (words; w) are observed. On the basis of this the hidden structures are deduced: topic distributions per document (θ), per-word topic assignments (z), and topic word distribution (β).  K = topic; D = Document.
 
