@@ -1,0 +1,98 @@
+#This all the code used. Step by step in chronological order with comments explaining all the code.
+
+# Install package
+install.packages("stm")
+install.packages("tm")
+install.packages("SnowballC")
+install.packages("stringr")
+install.packages("writexl")
+
+# Run packages
+library("stm")
+library("stringr")
+library("readxl")
+library("writexl")
+
+
+# Read data
+data <- read.csv("ff_df2.csv")
+
+# Clean news articles
+# Delete words before a certain character
+data$content <- gsub(".*Joepvanharen1", "", data$content) 
+# Delete words after a certain character
+data$content <-gsub(" Joepvanharen2:.*","",data$content) 
+## Delete whitespace in column
+data$content <- trimws(data$content, which = ("both"))
+write.csv(data, 'News_cleaned1.csv')
+
+# Remove HTML stuff. 
+data$Content = str_replace_all(data$Content, "&#x27;|&quot;|&#x2F;", "'") ## weird encoding
+data$Content = str_replace_all(data$Content, "<a(.*?)>", " ")             ## links 
+data$Content = str_replace_all(data$Content, "&gt;|&lt;|&amp;", " ")      ## html yuck
+data$Content = str_replace_all(data$Content, "&#[:digit:]+;", " ")        ## html yuck
+data$Content = str_remove_all(data$Content, "<[^>]*>")                   ## mmmmm, more html yuck
+
+# Clean tweets
+# Remove html text
+data$Content <- gsub("&amp", "", data$Content)
+data$Content <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", data$Content)
+data$Content <- gsub("@\\w+", "", data$Content)
+data$Content <- gsub("[[:punct:]]", "", data$Content)
+data$Content <- gsub("[[:digit:]]", "", data$Content)
+data$Content <- gsub("http\\w+", "", data$Content)
+# data$Content <- gsub("[ \t]{2,}", "", data$Content)
+data$Content <- gsub("^\\s+|\\s+$", "", data$Content)
+
+
+
+# get rid of unnecessary spaces
+#data$Content <- str_replace_all(data$Content," "," ")
+# Get rid of URLs
+#data$Content <- str_replace_all(data$Content, "http://t.co/[a-z,A-Z,0-9]*{8}","")
+# Take out retweet header, there is only one
+#data$Content <- str_replace(data$Content,"RT @[a-z,A-Z]*: ","")
+# Get rid of hashtags
+#data$Content <- str_replace_all(data$Content,"#","")
+# Get rid of references to other screennames
+#data$Content <- str_replace_all(data$Content,"@","") 
+
+# Use textProcessor and prepDocuments to clean and prepare data
+processed <- textProcessor(data$Content, metadata = data)
+out <- prepDocuments(processed$documents, processed$vocab, processed$meta)
+docs <- out$documents
+vocab <- out$vocab
+meta <- out$meta
+
+kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company_Type, data = meta) 
+
+# Estimate model
+model80 <- stm(documents = out$documents, vocab = out$vocab, 
+K = 80, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral")
+
+model60 <- stm(documents = out$documents, vocab = out$vocab, 
+K = 60, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral")
+
+
+plot(topicQuality(model = model80, documents = docs))
+
+labelTopics(model60)
+
+z <- data[-out$docs.removed]
+
+thoughts21 <- findThoughts(model60, texts = z["Content"], topics = 21, n = 3)\
+
+plot.STM(model80, "labels", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), label = 'frex', n = 10, width = 55)
+
+plot.STM(model60, "labels", topics = c(12, 18, 21, 27, 29, 31, 32, 37, 37, 42, 44, 46, 47, 49, 58), label = 'frex', n = 10, width = 55)
+
+out$meta$Company <- as.factor(out$meta$Company)
+prep <- estimateEffect(1:60 ~ Company, model60, meta = out$meta, uncertainty = "Global")
+summary(prep, topics = 12, 18, 21, 29, 31, 32, 37, 42, 44, 46, 47, 49, 58)
+
+plot(prep, covariate = "Company", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), model = model80, method = "difference", cov.value1 = "Primark", cov.value2 = "HM", xlab = "HM vs. Primark", main = "Effect of Company", xlim = c(-0.3, 0.9), labeltype = "custom", custom.labels = c("Government", "Factory worker union", "Hospital donation", "Fair wages", "Environmental impact", "Data protection", "Plastic bags", "Garment factory workers", "Supply chain transparency", "Abuse", "Uyghur workers", "Conscious fashion", "Copy right violation", "ABF Food profits", "Canceled rent", "Racist H&M ad", "Recycable cotton", "Hunting", "Furloughing employees", "Mohair wool", "Covid19 safety measures", "Recycable fashion", "Gender equality"))
+
+plot(prep, covariate = "Company", topics = c(12, 18, 21, 29, 31, 32, 37, 42, 44, 46, 47, 49, 58), model = model80, method = "difference", cov.value1 = "HM", cov.value2 = "Zara", xlab = "Zara vs H&M", main = "Effect of company", xlim = c(-0.3, 0.1), labeltype = "custom", custom.labels = c("Ban Mohair", "(Gender) Equality", "Fair wages", "Boycot Brazilian leather", "Ban plastic bags", "Uyghur workers", "Copyright violation", "Quartely results", "Cancel orders", "Factory workers union", "Racist H&M ad", "Sustainable fashion", "Covid19 safety measures"))
+
+
+
