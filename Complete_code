@@ -1,4 +1,4 @@
-#This all the code used. Step by step in chronological order with comments explaining all the code.
+# **This all the code used. Step by step in chronological order with comments explaining all the code.**
 
 # Install package
 install.packages("stm")
