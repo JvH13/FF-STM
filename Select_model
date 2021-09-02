@@ -1,2 +1,2 @@
-# Performs the searchK funcion from the STM package. In this case it creates diagnostic statistics for 60, 70, 80, 90, and 100 topics models. It uses 'Company_Type' as a topic covariate
+# Performs the searchK funcion from the STM package. In this case it creates diagnostic statistics for 60, 70, 80, 90, and 100 topics models. It uses 'Company' and 'Type' as topic covariates
 kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company_Type, data = meta) 
