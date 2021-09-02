@@ -1,0 +1,2 @@
+# Function that produces output containing four different methods of devising the words that form a topic.
+labelTopics(model80)
