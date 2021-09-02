@@ -49,7 +49,7 @@ docs <- out$documents
 vocab <- out$vocab
 meta <- out$meta
 
-kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company_Type, data = meta) # This function is used to compare models that use different amount of topics. The output are metrics to determine what the 'optimal' amount of topics is. 
+kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company + Type, data = meta) # This function is used to compare models that use different amount of topics. The output are metrics to determine what the 'optimal' amount of topics is. 
 
 # Estimate model
 model80 <- stm(documents = out$documents, vocab = out$vocab, 
@@ -58,26 +58,24 @@ K = 80, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.ty
 model60 <- stm(documents = out$documents, vocab = out$vocab, 
 K = 60, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral") # Same as above, except in this example a model with 60 topics is estimated. 
 
+plot(topicQuality(model = model80, documents = docs)) # Creates a plot displaying topic quality. Topic quality is a trade off between semantic coherence and exclusivity. 
 
-plot(topicQuality(model = model80, documents = docs))
+# Function that produces output containing four different methods of devising the words that form a topic.
+labelTopics(model80)
 
-labelTopics(model60)
-
-z <- data[-out$docs.removed]
-
-thoughts21 <- findThoughts(model60, texts = z["Content"], topics = 21, n = 3)\
-
+# With this function the top words for each selected topic are displayed. 
 plot.STM(model80, "labels", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), label = 'frex', n = 10, width = 55)
 
-plot.STM(model60, "labels", topics = c(12, 18, 21, 27, 29, 31, 32, 37, 37, 42, 44, 46, 47, 49, 58), label = 'frex', n = 10, width = 55)
-
+# With this code a regression analysis is run, using 'Company' and 'Type' as a covariates. 23 topics are selected. 
 out$meta$Company <- as.factor(out$meta$Company)
-prep <- estimateEffect(1:60 ~ Company, model60, meta = out$meta, uncertainty = "Global")
-summary(prep, topics = 12, 18, 21, 29, 31, 32, 37, 42, 44, 46, 47, 49, 58)
+prep <- estimateEffect(1:80 ~ Company + Type, model80, meta = out$meta, uncertainty = "Global")
+summary(prep, topics = 8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73)
 
-plot(prep, covariate = "Company", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), model = model80, method = "difference", cov.value1 = "Primark", cov.value2 = "HM", xlab = "HM vs. Primark", main = "Effect of Company", xlim = c(-0.3, 0.9), labeltype = "custom", custom.labels = c("Government", "Factory worker union", "Hospital donation", "Fair wages", "Environmental impact", "Data protection", "Plastic bags", "Garment factory workers", "Supply chain transparency", "Abuse", "Uyghur workers", "Conscious fashion", "Copy right violation", "ABF Food profits", "Canceled rent", "Racist H&M ad", "Recycable cotton", "Hunting", "Furloughing employees", "Mohair wool", "Covid19 safety measures", "Recycable fashion", "Gender equality"))
+# Plot function to visualize the regression results from estimateEffect. In this case 23 topics are displayed. The output shows the differences in topic proportion between Twitter and the news. Company and Type are being used as covariates.
+plot(prep, covariate = "Company + Type", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), model = model80, method = "difference", cov.value1 = "Twitter", cov.value2 = "News", xlab = "News vs. Twitter", main = "Effect of source", xlim = c(-0.3, 0.9), labeltype = "custom", custom.labels = c("Government", "Factory worker union", "Hospital donation", "Fair wages", "Environmental impact", "Data protection", "Plastic bags", "Garment factory workers", "Supply chain transparency", "Abuse", "Uyghur workers", "Conscious fashion", "Copy right violation", "ABF Food profits", "Canceled rent", "Racist H&M ad", "Recycable cotton", "Hunting", "Furloughing employees", "Mohair wool", "Covid19 safety measures", "Recycable fashion", "Gender equality"))
 
-plot(prep, covariate = "Company", topics = c(12, 18, 21, 29, 31, 32, 37, 42, 44, 46, 47, 49, 58), model = model80, method = "difference", cov.value1 = "HM", cov.value2 = "Zara", xlab = "Zara vs H&M", main = "Effect of company", xlim = c(-0.3, 0.1), labeltype = "custom", custom.labels = c("Ban Mohair", "(Gender) Equality", "Fair wages", "Boycot Brazilian leather", "Ban plastic bags", "Uyghur workers", "Copyright violation", "Quartely results", "Cancel orders", "Factory workers union", "Racist H&M ad", "Sustainable fashion", "Covid19 safety measures"))
+# Same example as above, but now the news and company reports are compared. 
+plot(prep, covariate = "Company + Type", topics = c(8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73), model = model80, method = "difference", cov.value1 = "News", cov.value2 = "Company reports", xlab = "Company reports vs News", main = "Effect of source", xlim = c(-0.3, 0.1), labeltype = "custom", custom.labels = c("Ban Mohair", "(Gender) Equality", "Fair wages", "Boycot Brazilian leather", "Ban plastic bags", "Uyghur workers", "Copyright violation", "Quartely results", "Cancel orders", "Factory workers union", "Racist H&M ad", "Sustainable fashion", "Covid19 safety measures"))
 
 
 
