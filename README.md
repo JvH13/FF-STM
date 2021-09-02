@@ -30,7 +30,7 @@ STM builds on LDA by adding two extra components: topic prevalence covariates an
 
 **STM process**
 
-Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package [‘STM’](https://www.structuraltopicmodel.com/)  (Roberts et al. 2014; Roberts et al. 2019). 
+Figure 3. provides an overview of the STM process. First, text data (and accompanying metadata) is collected and loaded into R. Second, the data is processed, so it has the correct format to serve as input for the model. Third, an analysis is run to select the best fitting model. Lastly, the best fitting model is estimated, additional analysis is performed to better understand the output of the model and the output of the model is visualized. All of the data preparation, analysis and visualization is done with the R package [‘STM’](https://www.structuraltopicmodel.com/)  (Roberts et al. 2014; Roberts et al. 2019). The complete code used for this paper can be found ['here'](https://github.com/JvH13/FF-STM/blob/main/Complete_code)
 
 ![STM_workflow](https://user-images.githubusercontent.com/79323371/121392333-912a4d00-c94f-11eb-9e4c-3a4999b08cf6.png)
 
