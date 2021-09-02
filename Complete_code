@@ -5,57 +5,42 @@ install.packages("stm")
 install.packages("tm")
 install.packages("SnowballC")
 install.packages("stringr")
-install.packages("writexl")
+
 
 # Run packages
 library("stm")
 library("stringr")
-library("readxl")
-library("writexl")
 
 
 # Read data
-data <- read.csv("ff_df2.csv")
+data <- read.csv("texts.csv") # Read CSV file containing the texts and meta-data.
 
 # Clean news articles
 # Delete words before a certain character
-data$content <- gsub(".*Joepvanharen1", "", data$content) 
+data$content <- gsub(".*JvH1", "", data$content) # The news articles downloaded from the NexisLexis database contain information that we did not need (e.g. certain meta-data, dates, etc.) Considering the structure of each news article, we swapped a certain word in each news article for either 'JvH1' or 'JvH2'. This made it possible to delete all text before the string 'JvH1' and after the string 'JvH2', only leaving us with the plain news article text. 
 # Delete words after a certain character
-data$content <-gsub(" Joepvanharen2:.*","",data$content) 
+data$content <-gsub(" JvH2:.*","",data$content) 
 ## Delete whitespace in column
 data$content <- trimws(data$content, which = ("both"))
-write.csv(data, 'News_cleaned1.csv')
+write.csv(data, 'News_cleaned.csv') # Saved as seperate CSV file. Cleaned data is added to the main datafile called 'data'. 
 
-# Remove HTML stuff. 
+# Remove HTML stuff from all texts
 data$Content = str_replace_all(data$Content, "&#x27;|&quot;|&#x2F;", "'") ## weird encoding
 data$Content = str_replace_all(data$Content, "<a(.*?)>", " ")             ## links 
 data$Content = str_replace_all(data$Content, "&gt;|&lt;|&amp;", " ")      ## html yuck
 data$Content = str_replace_all(data$Content, "&#[:digit:]+;", " ")        ## html yuck
-data$Content = str_remove_all(data$Content, "<[^>]*>")                   ## mmmmm, more html yuck
+data$Content = str_remove_all(data$Content, "<[^>]*>")                   ## more html yuck
 
-# Clean tweets
-# Remove html text
+# Remove HTML stuff from all texts 
 data$Content <- gsub("&amp", "", data$Content)
 data$Content <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", data$Content)
 data$Content <- gsub("@\\w+", "", data$Content)
 data$Content <- gsub("[[:punct:]]", "", data$Content)
 data$Content <- gsub("[[:digit:]]", "", data$Content)
 data$Content <- gsub("http\\w+", "", data$Content)
-# data$Content <- gsub("[ \t]{2,}", "", data$Content)
 data$Content <- gsub("^\\s+|\\s+$", "", data$Content)
 
-
-
-# get rid of unnecessary spaces
-#data$Content <- str_replace_all(data$Content," "," ")
-# Get rid of URLs
-#data$Content <- str_replace_all(data$Content, "http://t.co/[a-z,A-Z,0-9]*{8}","")
-# Take out retweet header, there is only one
-#data$Content <- str_replace(data$Content,"RT @[a-z,A-Z]*: ","")
-# Get rid of hashtags
-#data$Content <- str_replace_all(data$Content,"#","")
-# Get rid of references to other screennames
-#data$Content <- str_replace_all(data$Content,"@","") 
+# Note on removing HTML stuff: The textProcessor also removes many of the unwanted characters from the text. Because we are working with tweets and many weird/unwanted characters popped up we run the above two blocks of code as an extra. We might be overdoing it, but better safe than sorry. 
 
 # Use textProcessor and prepDocuments to clean and prepare data
 processed <- textProcessor(data$Content, metadata = data)
@@ -64,14 +49,14 @@ docs <- out$documents
 vocab <- out$vocab
 meta <- out$meta
 
-kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company_Type, data = meta) 
+kresult <- searchK(out$documents, out$vocab, K = c(60, 70, 80, 90, 100), prevalence =~ Company_Type, data = meta) # This function is used to compare models that use different amount of topics. The output are metrics to determine what the 'optimal' amount of topics is. 
 
 # Estimate model
 model80 <- stm(documents = out$documents, vocab = out$vocab, 
-K = 80, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral")
+K = 80, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral") # Estimate the topic model. In this case 80 topics are being estiamted. 
 
 model60 <- stm(documents = out$documents, vocab = out$vocab, 
-K = 60, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral")
+K = 60, prevalence =~ Company + Type, max.em.its = 200, data = out$meta, init.type = "Spectral") # Same as above, except in this example a model with 60 topics is estimated. 
 
 
 plot(topicQuality(model = model80, documents = docs))
