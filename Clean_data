@@ -1,8 +1,8 @@
 # Clean news articles
 # Delete words before a certain character
-data$content <- gsub(".*JvH131", "", data$content) # We added this word 'JvH131' in the news article right before the beginning of the body part of the news article
+data$content <- gsub(".*JvH1", "", data$content) # We added this word 'JvH131' in the news article right before the beginning of the body part of the news article
 # Delete words after a certain character
-data$content <-gsub(" JvH132:.*","",data$content)  # we added this word 'JvH131' immediately after the body part of the news article. We were pretty sure that this word and 'JvH131' would never appear in the news article, which made it two ideal cut-off points to remove unecessary text and keep only the body text.
+data$content <-gsub(" JvH2:.*","",data$content)  # we added this word 'JvH131' immediately after the body part of the news article. We were pretty sure that this word and 'JvH131' would never appear in the news article, which made it two ideal cut-off points to remove unecessary text and keep only the body text.
 ## Delete whitespace in column
 data$content <- trimws(data$content, which = ("both"))
 write.csv(data, 'News_cleaned1.csv')
