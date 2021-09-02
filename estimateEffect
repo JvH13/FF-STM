@@ -1,0 +1,4 @@
+# With this code a regression analysis is run, using 'Company' and 'Type' as a covariates. 23 topics are selected. 
+out$meta$Company <- as.factor(out$meta$Company)
+prep <- estimateEffect(1:80 ~ Company + Type, model80, meta = out$meta, uncertainty = "Global")
+summary(prep, topics = 8, 12, 18, 21, 28, 29, 31, 32, 33, 36, 37, 38, 42, 44, 46, 47, 49, 53, 64, 65, 67, 70, 73)
